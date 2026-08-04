@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     "An adversarial review layer for bodycam evidence. Prosecution, Defense and Judge agents on different model families produce a verdict traceable to the exact utterance and video frame. Four jurisdictions.",
   authors: [{ name: "Vitalii Karasov", url: "https://karasov.co" }],
   creator: "Vitalii Karasov",
+  verification: {
+    google: '<meta name="google-site-verification" content="vNlrEenP6E_iwxlIfDTmm4DQzacAcqUyJgbJPLsclx0" />',
+  },
   openGraph: {
     type: "website",
     url: "https://sentinel-audit.co",
