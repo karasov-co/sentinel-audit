@@ -31,3 +31,8 @@ results/standard/
 results/uvicorn.log
 
 # Keep curated demo data under results/{live,council,visual}/ — they're tracked
+
+venv/
+.venv/
+__pycache__/
+.DS_Store
