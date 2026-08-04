@@ -238,7 +238,7 @@ export default async function LandingPage() {
 
       {/* Footer */}
       <footer className="text-xs text-slate-500 text-center mt-auto py-8 border-t border-white/[0.04]">
-        Powered by Vultr &middot; Google Gemini &middot; Featherless &middot; Speechmatics
+        Powered by Google Gemini &middot; Featherless &middot; Speechmatics
       </footer>
       </div>
     </>
