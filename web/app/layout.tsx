@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Vitalii Karasov", url: "https://karasov.co" }],
   creator: "Vitalii Karasov",
   verification: {
-    google: '<meta name="google-site-verification" content="vNlrEenP6E_iwxlIfDTmm4DQzacAcqUyJgbJPLsclx0" />',
+    google: "vNlrEenP6E_iwxlIfDTmm4DQzacAcqUyJgbJPLsclx0",
   },
   openGraph: {
     type: "website",
