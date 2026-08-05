@@ -6,6 +6,8 @@
 
 🌐 [Live demo](https://sentinel-audit.co/) · 📄 [Slides](https://storage.googleapis.com/lablab-static-eu/presentations/submissions/octgaogix566cpvjlul7vs5w/octgaogix566cpvjlul7vs5w-1779198324896_msejh8vwzkjwydufthllxv2t.pdf)
 
+🏆 Prize winner — AI Agent Olympics, Milan AI Week 2026 (2,382 participants, 726 teams · 3rd place, Featherless AI track)
+
 <!-- GIF GOES HERE — see instructions. Replace this comment with:
 <p align="center">
   <a href="https://sentinel-audit.co/demo/us_video3?autoplay=instant&speed=10">
@@ -219,6 +221,16 @@ On a 5–10 minute bodycam recording:
 | Speechmatics RT + Batch | included in plan |
 
 **~$0.10–0.20 per recording.** Cheap enough to audit every interaction.
+
+## Limitations & validation status
+
+SENTINEL is a working prototype validated on seven demo cases across four
+jurisdictions. It has not yet undergone independent legal review, a formal
+accuracy study, or production deployment with a police oversight body.
+"Defensible" here means every ruling is traceable to its evidence — not that
+verdicts have been admitted in court. A structured evaluation (reproducibility
+runs, inter-model agreement, false-positive analysis, expert comparison) is
+published in [docs/EVALS.md](docs/EVALS.md) and expands with each iteration.
 
 ## License
 
