@@ -125,9 +125,17 @@ The FastAPI service (Speechmatics RT session manager, FAISS retrieval indexes, c
 | `us_video2_vision` | US | officer_justified | none | Warrantless search vindicated after vehicle console reveals hidden narcotics |
 | `it_carabinieri_arrest` | IT | mixed | medium | Night apprehension under Codice di Procedura Penale and de-escalation protocols |
 | `nl_politie_inval` | NL | officer_justified | none | Tactical room-clearing entry — Vision extracts hidden handgun threat, ECHR life protections held |
-| `es_robbery_shootout` | ES | officer_justified | none | Armed robbery tactical engagement — adversarial review filters 23 noisy alerts to zero violations under ECHR proportionality |
+| `es_robbery_shootout` | ES | unclear | none | Armed robbery tactical engagement — 23 rapid alerts, 8 deep findings, but the Judge consolidation returned invalid JSON and adjudicated none of them. See [EVALS §2](docs/EVALS.md#2-verdict-reproducibility) |
 
 Pre-computed sessions live in `results/live/*_session.json` and are mirrored into `web/public/samples/` for the static demo.
+
+## Evaluation
+
+[**docs/EVALS.md**](docs/EVALS.md) reports what the council actually does on these seven cases — verdict reproducibility, the alert funnel, how often the Judge sides with each side, and three ways to fool the system today.
+
+Headline numbers: the deterministic layers show **0 drift across 5 runs × 199 utterances**; the funnel runs **38 rapid alerts → 30 deep findings → 5 surviving**; and the Judge sides with the Defense on **27 of 33 contested findings (82%)** — so "neither side dominates" is currently a design intent, not a measured property. The report also documents a Judge failure on 1 of 7 cases, a hallucinated rule ID, and a keyword bank that caught **0 of 22** paraphrased critical-event probes.
+
+Every figure is reproducible from committed artifacts with no API keys: `python scripts/replay_eval.py 5`.
 
 > **Note on recordings:** This repository contains **no source bodycam footage**. The `recordings/` directory is not committed and is excluded by `.gitignore`. The pre-computed `results/live/*_session.json` files replay any demo end-to-end without it. To run a fresh audit, supply your own recording.
 
@@ -193,7 +201,7 @@ Adding a new jurisdiction is one JSON file in `case_law/police_<code>.json` plus
 - **Data residency** — the audit service is self-hosted. Deploy it in the region your regulator requires; no data leaves the customer's tenancy.
 - **Human in the loop** — SENTINEL produces verdicts, not decisions. Every ruling is a recommendation for an oversight officer to sign off on.
 - **Full auditability** — every agent writes to a unified `Trace`. Reproducible. Discoverable in court.
-- **Bias by construction** — Defense and Prosecution run on different model families (gemma vs gpt-oss) so neither side dominates the reasoning.
+- **Bias by construction** — Defense and Prosecution run on different model families (gemma vs gpt-oss) so neither side dominates the reasoning. This is a design intent, not yet a validated property: on the seven demo cases the Judge sides with the Defense on 82% of contested findings ([EVALS §4](docs/EVALS.md#4-adversarial-balance)).
 
 ## The engine beyond police
 
@@ -204,7 +212,7 @@ The same adversarial-council architecture powers a `corporate_security` vertical
 **Frontend** — Next.js 16, Tailwind v4, shadcn/ui
 **Backend** — FastAPI, SQLModel, SSE-Starlette
 **Speech** — Speechmatics RT + Batch (diarization, translation, sentiment, topics, summary)
-**LLMs** — Featherless (gpt-oss-120b, gemma-3-26B), Google Gemini 3.1 Pro
+**LLMs** — Featherless (gpt-oss-120b Prosecution, gemma-4-31B Defense, gemma-4-26B rapid, gemma-4-E4B router), Google Gemini 3.1 Pro (Judge, Vision)
 **Retrieval** — FAISS + sentence-transformers over rule-pack JSON
 **Vision** — Gemini 3.1 Pro on GCS-backed video URIs
 **Deploy** — Vercel (static demo, no backend required) · any VPS for the audit service
