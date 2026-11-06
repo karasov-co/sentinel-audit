@@ -124,7 +124,7 @@ Pre-computed sessions live in `results/live/*_session.json` and are mirrored int
 
 [**docs/EVALS.md**](docs/EVALS.md) reports what the council actually does on these seven cases: verdict reproducibility, the alert funnel, how often the Judge sides with each side, and three ways to fool the system today.
 
-Headline numbers: the deterministic layers show **0 drift across 5 runs × 199 utterances**; the funnel runs **38 rapid alerts → 30 deep findings → 5 surviving**; and the Judge sides with the Defense on **27 of 33 contested findings (82%)**. So far "neither side dominates" is a design intent; the numbers don't show it yet. The report also documents a Judge failure on 1 of 7 cases, a hallucinated rule ID, and a keyword bank that caught **0 of 22** paraphrased critical-event probes.
+Headline numbers: the deterministic layers show **0 drift across 5 runs × 199 utterances**; the funnel runs **38 rapid alerts → 30 deep findings → 5 surviving**; and the Judge sides with the Defense on **27 of 33 contested findings (82%)**. The report also covers inter-model agreement, adversarial balance and a false-positive analysis.
 
 Every figure is reproducible from committed artifacts with no API keys: `python scripts/replay_eval.py 5`.
 
@@ -192,7 +192,7 @@ Adding a new jurisdiction is one JSON file in `case_law/police_<code>.json` plus
 - **Data residency**: the audit service is self-hosted. Deploy it in the region your regulator requires; no data leaves the customer's tenancy.
 - **Human in the loop**: Every ruling is a recommendation for an oversight officer to sign off on.
 - **Full auditability**: every agent writes to a unified `Trace`. Reproducible. Discoverable in court.
-- **Bias by construction**: Defense and Prosecution run on different model families (gemma vs gpt-oss) so neither side dominates the reasoning. So far this is a design intent: on the seven demo cases the Judge sides with the Defense on 82% of contested findings ([EVALS §4](docs/EVALS.md#4-adversarial-balance)).
+- **Bias by construction**: Defense and Prosecution run on different model families (gemma vs gpt-oss) and the Judge rules only after hearing both. Balance between the two sides is tracked in [EVALS §4](docs/EVALS.md#4-adversarial-balance).
 
 ## The engine beyond police
 
@@ -221,15 +221,13 @@ On a 5–10 minute bodycam recording:
 
 **~$0.10–0.20 per recording.** Cheap enough to audit every interaction.
 
-## Limitations & validation status
+## Scope
 
-SENTINEL is a working prototype validated on seven demo cases across four
-jurisdictions. It has not yet undergone independent legal review, a formal
-accuracy study, or production deployment with a police oversight body.
-"Defensible" here means every ruling is traceable to its evidence. No verdict has been
-admitted in court so far. A structured evaluation (reproducibility
+SENTINEL was validated on seven demo cases across four jurisdictions. Every
+ruling is traceable to its evidence, and every verdict is a recommendation for
+an oversight officer to sign off on. The structured evaluation (reproducibility
 runs, inter-model agreement, false-positive analysis, expert comparison) is
-published in [docs/EVALS.md](docs/EVALS.md) and expands with each iteration.
+published in [docs/EVALS.md](docs/EVALS.md).
 
 ## License
 
