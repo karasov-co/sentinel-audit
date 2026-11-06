@@ -124,7 +124,7 @@ Pre-computed sessions live in `results/live/*_session.json` and are mirrored int
 
 [**docs/EVALS.md**](docs/EVALS.md) reports what the council actually does on these seven cases: verdict reproducibility, the alert funnel, how often the Judge sides with each side, and three ways to fool the system today.
 
-Headline numbers: the deterministic layers show **0 drift across 5 runs × 199 utterances**; the funnel runs **38 rapid alerts → 30 deep findings → 5 surviving**; and the Judge sides with the Defense on **27 of 33 contested findings (82%)**. The report also covers inter-model agreement, adversarial balance and a false-positive analysis.
+Headline numbers: the deterministic layers show **0 drift across 5 runs × 199 utterances**; the funnel runs **38 rapid alerts → 30 deep findings → 5 surviving**. The report also covers inter-model agreement, adversarial balance and a false-positive analysis.
 
 Every figure is reproducible from committed artifacts with no API keys: `python scripts/replay_eval.py 5`.
 
